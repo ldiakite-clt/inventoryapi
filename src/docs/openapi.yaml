@@ -1,0 +1,15 @@
+openapi: 3.0.0
+info:
+  title: Inventory API
+  version: 1.0.0
+  description: API for managing inventory items, categories, and locations.
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+paths:
+  /health:
+    get:
+      summary: Check API health
+      responses:
+        '200':
+          description: Server is running

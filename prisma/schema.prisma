@@ -1,46 +1,46 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  role      Role     @default(USER)
-  items     Item[]   @relation("UserItems", onDelete: Cascade)
-  categories Category[] @relation("UserCategories", onDelete: Cascade)
-  locations Location[] @relation("UserLocations", onDelete: Cascade)
+  id         Int        @id @default(autoincrement())
+  email      String     @unique
+  password   String
+  role       Role       @default(USER)
+  
+  items      Item[]     @relation("UserItems")
+  categories Category[] @relation("UserCategories")
+  locations  Location[] @relation("UserLocations")
+
   @@map("users")
 }
 
 model Category {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  userId    Int
-  user      User     @relation("UserCategories", fields: [userId], references: [id])
-  items     Item[]   @relation("CategoryItems", onDelete: Cascade)
+  id     Int    @id @default(autoincrement())
+  name   String
+  userId Int
+  user   User   @relation("UserCategories", fields: [userId], references: [id], onDelete: Cascade)
+  items  Item[] @relation("CategoryItems")
+
   @@map("categories")
 }
 
 model Location {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  userId    Int
-  user      User     @relation("UserLocations", fields: [userId], references: [id])
-  items     Item[]   @relation("LocationItems", onDelete: Cascade)
+  id     Int    @id @default(autoincrement())
+  name   String
+  userId Int
+  user   User   @relation("UserLocations", fields: [userId], references: [id], onDelete: Cascade)
+  items  Item[] @relation("LocationItems")
+
   @@map("locations")
 }
 
@@ -49,17 +49,13 @@ model Item {
   name        String
   description String?
   quantity    Int      @default(1)
-  createdAt   DateTime @default(now())
   userId      Int
   categoryId  Int
   locationId  Int
-  user        User     @relation("UserItems", fields: [userId], references: [id])
-  category    Category @relation("CategoryItems", fields: [categoryId], references: [id])
-  location    Location @relation("LocationItems", fields: [locationId], references: [id])
-  @@map("items")
-}
+  
+  user        User     @relation("UserItems", fields: [userId], references: [id], onDelete: Cascade)
+  category    Category @relation("CategoryItems", fields: [categoryId], references: [id], onDelete: Cascade)
+  location    Location @relation("LocationItems", fields: [locationId], references: [id], onDelete: Cascade)
 
-enum Role {
-  USER
-  ADMIN
+  @@map("items")
 }
