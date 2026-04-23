@@ -1,0 +1,38 @@
+erDiagram
+    users ||--o{ items : "owns"
+    users ||--o{ categories : "owns"
+    users ||--o{ locations : "owns"
+    categories ||--o{ items : "contains"
+    locations ||--o{ items : "stores"
+
+    users {
+        int id PK
+        string email UK
+        string password
+        enum role
+    }
+
+    items {
+        int id PK
+        string name
+        string description
+        int quantity
+        datetime created_at
+        int user_id FK
+        int category_id FK
+        int location_id FK
+    }
+
+    categories {
+        int id PK
+        string name
+        datetime created_at
+        int user_id FK
+    }
+
+    locations {
+        int id PK
+        string name
+        datetime created_at
+        int user_id FK
+    }
