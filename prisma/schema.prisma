@@ -16,6 +16,7 @@ model User {
   email      String     @unique
   password   String
   role       Role       @default(USER)
+  createdAt  DateTime   @default(now())
   
   items      Item[]     @relation("UserItems")
   categories Category[] @relation("UserCategories")
@@ -25,21 +26,23 @@ model User {
 }
 
 model Category {
-  id     Int    @id @default(autoincrement())
-  name   String
-  userId Int
-  user   User   @relation("UserCategories", fields: [userId], references: [id], onDelete: Cascade)
-  items  Item[] @relation("CategoryItems")
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation("UserCategories", fields: [userId], references: [id], onDelete: Cascade)
+  items     Item[]   @relation("CategoryItems")
 
   @@map("categories")
 }
 
 model Location {
-  id     Int    @id @default(autoincrement())
-  name   String
-  userId Int
-  user   User   @relation("UserLocations", fields: [userId], references: [id], onDelete: Cascade)
-  items  Item[] @relation("LocationItems")
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation("UserLocations", fields: [userId], references: [id], onDelete: Cascade)
+  items     Item[]   @relation("LocationItems")
 
   @@map("locations")
 }
@@ -48,6 +51,7 @@ model Item {
   id          Int      @id @default(autoincrement())
   name        String
   description String?
+  createdAt   DateTime @default(now())
   quantity    Int      @default(1)
   userId      Int
   categoryId  Int

@@ -37,6 +37,21 @@ export async function login(email, password) {
     throw error;
   }
 
-  const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1d' });
-  return token;
+  const accessToken = jwt.sign(
+    { userId: user.id, email: user.email, role: user.role },
+    JWT_SECRET,
+    { expiresIn: '7d' }
+  );
+  return { accessToken };
+}
+
+export function verifyToken(token) {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    return decoded;
+  } catch (error) {
+    const err = new Error('Invalid or expired token');
+    err.status = 401;
+    throw err;
+  }
 }
