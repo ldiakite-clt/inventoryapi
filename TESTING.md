@@ -1,6 +1,17 @@
 # API Testing Plan (Swagger UI)
 
+
 This guide provides step-by-step instructions to verify all API endpoints using the interactive documentation at `/api-docs`.
+
+
+## Live Links
+- **API Root:** https://inventoryapi-6cew.onrender.com
+- **API Health**: https://inventoryapi-6cew.onrender.com/health
+- **API Documentation:** https://inventoryapi-6cew.onrender.com/api-docs
+
+--- 
+
+
 
 ## 1. Authentication Endpoints
 

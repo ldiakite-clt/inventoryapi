@@ -4,6 +4,7 @@ A Node.js REST API for tracking personal inventory items, categories, and storag
 
 ## Live Links
 - **API Root:** https://inventoryapi-6cew.onrender.com
+- **API Health**: https://inventoryapi-6cew.onrender.com/health
 - **API Documentation:** https://inventoryapi-6cew.onrender.com/api-docs
 
 ## Tech Stack
