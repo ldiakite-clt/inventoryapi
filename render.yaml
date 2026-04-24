@@ -1,7 +1,7 @@
 services:
   - type: web
     name: inventory-api
-    env: node
+    runtime: node
     plan: free
     buildCommand: npm install
     startCommand: npm run migrate:deploy && npm run seed:prod && npm start

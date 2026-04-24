@@ -8,7 +8,7 @@ info:
 servers:
   - url: http://localhost:3000
     description: Local development server
-  - url: https://inventory-api.onrender.com
+  - url: https://inventoryapi-6cew.onrender.com
     description: Production server on Render
 
 components:
