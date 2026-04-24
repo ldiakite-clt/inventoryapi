@@ -8,6 +8,7 @@ This guide provides step-by-step instructions to verify all API endpoints using 
 - **API Root:** https://inventoryapi-6cew.onrender.com
 - **API Health**: https://inventoryapi-6cew.onrender.com/health
 - **API Documentation:** https://inventoryapi-6cew.onrender.com/api-docs
+- ** Repo**: https://github.com/ldiakite-clt/inventoryapi 
 
 --- 
 
